@@ -12,6 +12,7 @@ import {
   AuthType,
   SismoConnectButton,
   SismoConnectConfig,
+  ClaimRequest,
 } from "@sismo-core/sismo-connect-react";
 import { useBurnerWalletStore } from "@/features/burner/useBurnerWalletStore";
 import { useState } from "react";
@@ -46,6 +47,16 @@ const sismoConnectConfig: SismoConnectConfig = {
   },
 };
 
+ export const CLAIMS: ClaimRequest[] = [
+   {
+     // Nouns DAO NFT
+     groupId: "0xa4ff29395199edcc63221e5b9b5c202d",
+     isSelectableByUser: true,
+     isOptional: true,
+
+   },
+ ];
+
 export const SismoButton = () => {
   const [sismoResponse, setSismoResponse] = useState<string>("");
   const { setSismoProof } = useCredentialsStore();
@@ -65,6 +76,8 @@ export const SismoButton = () => {
         // the auth request we want to make
         // here we want the proof of a Sismo Vault ownership from our users
         auths={[{ authType: AuthType.VAULT }]}
+        // Claims, NOUN DAO
+        claims={CLAIMS}
         // we ask the user to sign a message
         // it will be used onchain to prevent frontrunning
         signature={{ message: signMessage(wallet?.address as `0x${string}`) }}
@@ -98,7 +111,7 @@ export const SismoButton = () => {
 //     responseBytes && chain
 //       ? {
 //           address:
-//             "0xc194948f79639EAd8B90F0fB90A4fee8bC3FFAC8" as `0x${string}}`,
+//             "0x784CC2d483c77C7A7CFDDC07Ff9BD350b4Dea488" as `0x${string}}`,
 //           abi: [...AirdropABI, ...errorsABI],
 //           functionName: "claimWithSismo",
 //           args: [responseBytes],
