@@ -23,7 +23,7 @@ const ChatsList = () => {
                   <UserCircleIcon className="w-12" />
                 </div>
                 <div className="flex-1">
-                  <div className="font-bold">{truncateAddress(address)}</div>
+                  <div className="font-bold"> Governance Vote: {truncateAddress(address)}</div>
                   {/* <div>
                     {truncateAddress(
                       namespaces.eip155.accounts[0].split(":").splice(-1)[0]
