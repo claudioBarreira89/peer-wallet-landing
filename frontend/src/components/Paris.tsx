@@ -12,6 +12,8 @@ import { polygonMumbai } from "wagmi/chains";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { publicProvider } from "wagmi/providers/public";
 import { useAccount } from "wagmi";
+import { usePeerWalletTokenBalance } from "@/features/usePeerWalletTokenBalance";
+// import { SismoClaimButton } from "@/features/sismo";
 
 const { chains, publicClient } = configureChains(
   [polygonMumbai],
@@ -42,6 +44,9 @@ export default function ParisLanding() {
 
 function Home() {
   const { address } = useAccount();
+  const peerWalletTokenBalance = usePeerWalletTokenBalance();
+
+  const balance = peerWalletTokenBalance.data?.toString();
 
   return (
     <div className="App min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
@@ -61,6 +66,16 @@ function Home() {
           </div>
           {!address && <Connect />}
           {address && <Claim />}
+          {peerWalletTokenBalance.data && (
+            <div>
+              <div className="text-white text-4xl">
+                {peerWalletTokenBalance.data.toString()}
+              </div>
+              <div className="text-white text-4xl">
+                {peerWalletTokenBalance.data.toString()}
+              </div>
+            </div>
+          )}
         </main>
       </div>
     </div>
@@ -79,8 +94,8 @@ const Connect = () => (
 
 const Claim = () => {
   const handleClaim = () => {
-    window.open("http://localhost:3000/claim-polygon");
-    // window.open("https://peer-wallet.vercel.app/claim-polygon");
+    // window.open("http://localhost:3000/claim-polygon");
+    window.open("https://peer-wallet.vercel.app/claim-polygon");
   };
 
   return (
